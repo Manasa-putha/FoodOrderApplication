@@ -1,0 +1,38 @@
+.restaurant-form, .menu-form {
+    margin-bottom: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    margin-right: 10px;
+  }
+  
+  h3 {
+    margin-top: 20px;
+  }
+  
+  .mat-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  button.mat-icon-button {
+    margin-left: 8px;
+  }
+  .close-button {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    color: rgba(0, 0, 0, 0.845); 
+  }
+  
+  .mat-dialog-title {
+    position: relative; 
+    right: 16px;
+    position: absolute;
+  }
+  

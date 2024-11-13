@@ -1,0 +1,12 @@
+.search-form-field {
+    width: 100%;
+  }
+  
+  .clickable-cell {
+    cursor: pointer;
+  }
+  
+  .mat-card {
+    margin: 15px 0;
+  }
+  

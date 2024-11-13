@@ -1,0 +1,77 @@
+<mat-card>
+    <mat-card-header>
+      <h1>Register Restaurant</h1>
+    </mat-card-header>
+  
+    <mat-card-content [formGroup]="registerRestaurant">
+      <mat-form-field color="accent">
+        <mat-label>Restaurant Name</mat-label>
+        <input matInput formControlName="restaurantName">
+      </mat-form-field>
+  
+      <mat-form-field color="accent">
+        <mat-label>Restaurant Address</mat-label>
+        <input matInput formControlName="restaurantAddress">
+      </mat-form-field>
+  
+      <mat-form-field color="accent">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber">
+      </mat-form-field>
+  
+      <button mat-stroked-button color="accent" 
+              [disabled]="registerRestaurant.invalid" (click)="registerNewRestaurant()">
+        <span>Register</span>
+      </button>
+    </mat-card-content>
+  </mat-card>
+  
+  <!-- Menu Management -->
+  <mat-card>
+    <mat-card-header>
+      <h1>Add New Menu Item</h1>
+    </mat-card-header>
+  
+    <mat-card-content [formGroup]="newMenuItem">
+      <mat-form-field color="accent">
+        <mat-label>Item Name</mat-label>
+        <input matInput formControlName="itemName">
+      </mat-form-field>
+  
+      <mat-form-field color="accent">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
+      </mat-form-field>
+  
+      <mat-form-field color="accent">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description">
+      </mat-form-field>
+  
+      <button mat-stroked-button color="accent" 
+              [disabled]="newMenuItem.invalid" (click)="addNewMenuItem()">
+        <span>Add</span>
+      </button>
+    </mat-card-content>
+  </mat-card>
+  
+  <!-- Manage Orders -->
+  <mat-card>
+    <mat-card-header>
+      <h1>Manage Orders</h1>
+    </mat-card-header>
+  
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <h1>Customer Reviews</h1>
+    </mat-card-header>
+  
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  

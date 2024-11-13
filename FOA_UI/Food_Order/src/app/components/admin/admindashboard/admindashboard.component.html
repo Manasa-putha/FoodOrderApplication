@@ -1,0 +1,102 @@
+
+<h2 mat-dialog-title>Manage Restaurant
+  <button mat-icon-button (click)="closeDialog()" class="close-button" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content>
+<form (ngSubmit)="saveRestaurant()"  #restaurantForm="ngForm"class="restaurant-form">
+    <mat-form-field class="full-width">
+      <mat-label>Restaurant Name</mat-label>
+      <input matInput [(ngModel)]="restaurant.restaurantName" name="restaurantName" required>
+      <mat-error *ngIf="restaurantForm.controls['restaurantName']?.invalid && restaurantForm.controls['restaurantName']?.touched">
+        Restaurant Name is required.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input matInput [(ngModel)]="restaurant.location" name="location" required>
+      <mat-error *ngIf="restaurantForm.controls['location']?.invalid && restaurantForm.controls['location']?.touched">
+        Location is required.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Cuisine</mat-label>
+      <input matInput [(ngModel)]="restaurant.cuisine" name="cuisine" required>
+      <mat-error *ngIf="restaurantForm.controls['cuisine']?.invalid && restaurantForm.controls['cuisine']?.touched">
+        Cuisine is required.
+      </mat-error>
+    </mat-form-field>
+  
+    <button mat-raised-button type="submit" color="primary" [disabled]="!restaurantForm.valid">Save Restaurant</button>
+  </form>
+  
+  <hr>
+  
+  <h3>Manage Menu Items</h3>
+  <form (ngSubmit)="addMenuItem()" #menuForm="ngForm"class="menu-form">
+    <mat-form-field class="full-width">
+      <mat-label>Dish Name</mat-label>
+      <input matInput [(ngModel)]="newMenuItem.dishName" name="dishName" required>
+  <mat-error *ngIf="menuForm.controls['dishName']?.invalid && menuForm.controls['dishName']?.touched">
+    Dish Name is required.
+  </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput [(ngModel)]="newMenuItem.price" name="price" type="number" required>
+      <mat-error *ngIf="menuForm.controls['price']?.invalid && menuForm.controls['price']?.touched">
+        Price is required.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="newMenuItem.description" name="description" required>
+      <mat-error *ngIf="menuForm.controls['description']?.invalid && menuForm.controls['description']?.touched">
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+  
+    <button mat-raised-button type="submit" color="primary"  [disabled]="!menuForm.valid">Add Menu Item</button>
+  </form>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let item of restaurant.menus">
+      {{ item.dishName }} - {{ item.price | currency }}
+      <button mat-icon-button (click)="editMenuItem(item)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteMenuItem(item)">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    <div *ngIf="item.isEditing">
+        <mat-form-field>
+          <input matInput [(ngModel)]="item.dishName" name="editDishName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="item.price" name="editPrice" type="number" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="item.description" name="editDescription" required>
+        </mat-form-field>
+        <button mat-icon-button (click)="saveMenuItem(item)">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button (click)="cancelEdit(item)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  
+<hr>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions>

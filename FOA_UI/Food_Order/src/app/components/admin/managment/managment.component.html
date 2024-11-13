@@ -1,0 +1,95 @@
+<h2>Restaurants List </h2>
+<button mat-raised-button color="primary" (click)="addRestaurant()">Add New Restaurant</button>
+
+<mat-accordion>
+  <ng-container *ngFor="let restaurant of restaurants" >
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ restaurant.restaurantName | titlecase }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ restaurant.location }} - {{ restaurant.cuisine | titlecase }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <ng-template #noMenus>
+        <p>No menu items available.</p>
+      </ng-template>
+      <div>
+
+<div *ngIf="restaurant.menus.length > 0; else noMenus">
+    <h3>Menu Items</h3>
+    <table mat-table [dataSource]="restaurant.menus" class="mat-elevation-z8">
+      <ng-container matColumnDef="dishName">
+        <th mat-header-cell *matHeaderCellDef> Dish Name </th>
+        <td mat-cell *matCellDef="let menu">
+          <span *ngIf="!menu.isEditing">{{ menu.dishName }}</span>
+          <input *ngIf="menu.isEditing" [(ngModel)]="menu.dishName" placeholder="Dish Name" required />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let menu">
+          <span *ngIf="!menu.isEditing">{{ menu.price | currency }}</span>
+          <input *ngIf="menu.isEditing" [(ngModel)]="menu.price" placeholder="Price" type="number"required/>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let menu">
+          <span *ngIf="!menu.isEditing">{{ menu.description }}</span>
+          <input *ngIf="menu.isEditing" [(ngModel)]="menu.description" placeholder="Description"required/>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let menu">
+          <button mat-icon-button color="accent" (click)="editMenuItem(menu)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button *ngIf="menu.isEditing" mat-icon-button color="primary" (click)="saveMenuItem(restaurant, menu)">
+            <mat-icon>save</mat-icon>
+          </button>
+     
+        <button *ngIf="menu.isEditing" mat-icon-button color="warn" (click)="cancelEdit(menu)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+          <button mat-icon-button color="warn" (click)="deleteMenuItem(restaurant, menu)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="['dishName', 'price', 'description', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['dishName', 'price', 'description', 'actions']"></tr>
+    </table>
+  </div>
+        <h3>Add New Menu Item</h3>
+        <form #menuForm="ngForm">
+          <mat-form-field>
+            <input matInput [(ngModel)]="newMenuItem.dishName" name="dishName" placeholder="Dish Name" required />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="newMenuItem.price" name="price" placeholder="Price" type="number" required />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="newMenuItem.description" name="description" placeholder="Description" required />
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" (click)="addMenuItem(restaurant)" [disabled]="!menuForm.valid">Add Menu Item</button>
+          <button mat-button type="button" (click)="cancelMenuItem()">Cancel</button> 
+        </form>
+
+      <button mat-icon-button color="warn" (click)="editRestaurant(restaurant)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteRestaurant(restaurant)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  

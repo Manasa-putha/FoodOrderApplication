@@ -1,0 +1,27 @@
+<!-- <h1 mat-dialog-title>Order Details</h1>
+<div mat-dialog-content>
+  <p><strong>Order ID:</strong> {{ data.orderId }}</p>
+  <p><strong>Status:</strong> {{ data.orderStatus }}</p>
+  
+  <table mat-table [dataSource]="data.items">
+    <ng-container matColumnDef="dishName">
+      <th mat-header-cell *matHeaderCellDef> Dish Name </th>
+      <td mat-cell *matCellDef="let dish"> {{ dish.dishName }} </td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let dish"> {{ dish.quantity }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let dish"> {{ dish.price | currency }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['dishName', 'quantity', 'price']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['dishName', 'quantity', 'price']"></tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Close</button>
+</div> -->
